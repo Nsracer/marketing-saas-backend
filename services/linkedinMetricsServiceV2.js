@@ -204,7 +204,7 @@ class LinkedInMetricsServiceV2 {
             partialData: true,
             profile: profile,
             personalAnalytics: personalAnalytics, // Include personal post/profile analytics
-            companyName: profile?.name || 'Your Profile',
+            companyName: null, // Don't use profile name for company - avoid confusion in UI
             companyUrl: null,
             companyFollowers: 0,
             source: 'official-api-partial',
@@ -593,6 +593,13 @@ class LinkedInMetricsServiceV2 {
       // The basic ACL endpoint only gives URNs and roles
       const detailedOrgs = await Promise.all(elements.map(async (element) => {
         const orgUrn = element.organizationalTarget;
+
+        // STRICT FILTERING: Only allow organizations and brands
+        if (!orgUrn || (!orgUrn.startsWith('urn:li:organization:') && !orgUrn.startsWith('urn:li:organizationBrand:'))) {
+          console.warn(`   ⚠️ Skipping invalid organizational entity: ${orgUrn}`);
+          return null;
+        }
+
         const orgId = orgUrn ? orgUrn.split(':').pop() : null;
 
         let name = `Organization ${orgId}`;
@@ -636,7 +643,10 @@ class LinkedInMetricsServiceV2 {
         };
       }));
 
-      return detailedOrgs;
+      // Filter out nulls (skipped entities)
+      return detailedOrgs.filter(org => org !== null);
+
+
     } catch (error) {
       // Log detailed error info for debugging
       const status = error.response?.status;

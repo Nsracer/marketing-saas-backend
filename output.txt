@@ -1,0 +1,661 @@
+Dotenv parsed: [
+  'PORT',
+  'NODE_ENV',
+  'FRONTEND_URL',
+  'BACKEND_URL',
+  'GOOGLE_CLIENT_ID',
+  'GOOGLE_CLIENT_SECRET',
+  'GOOGLE_REDIRECT_URI',
+  'GOOGLE_API_KEY',
+  'GOOGLE_ANALYTICS_PROPERTY_ID',
+  'GOOGLE_SEARCH_CONSOLE_SITE_URL',
+  'GOOGLE_APPLICATION_CREDENTIALS',
+  'GOOGLE_CLOUD_PROJECT_ID',
+  'SUPABASE_URL',
+  'SUPABASE_SERVICE_KEY',
+  'SE_RANKING_API_TOKEN',
+  'SE_RANKING_BASE_URL',
+  'OPENAI',
+  'GEMINI_API_KEY',
+  'RAPIDAPI_KEY',
+  'SEARCHAPI_KEY',
+  'CHANGEDETECTION_API_KEY',
+  'FACEBOOK_APP_ID',
+  'FACEBOOK_APP_SECRET',
+  'LINKEDIN_CLIENT_ID',
+  'LINKEDIN_CLIENT_SECRET',
+  'LINKEDIN_REDIRECT_URI',
+  'APIFY_API_KEY',
+  'APIFY_API_TOKEN',
+  'PUPPETEER_API_URL',
+  'PUPPETEER_API_KEY',
+  'STRIPE_SECRET_KEY',
+  'STRIPE_WEBHOOK_SECRET',
+  'LINKEDIN_OPENID_CLIENT_ID',
+  'LINKEDIN_OPENID_CLIENT_SECRET',
+  'OPENID_REDIRECT_URI',
+  'LINKEDIN_OPENID_REDIRECT_URI',
+  'STRIPE_PRICE_STARTER',
+  'STRIPE_PRICE_GROWTH',
+  'STRIPE_PRICE_PRO'
+]
+APIFY_API_KEY: Set (starts with apify)
+APIFY_API_TOKEN: Set (starts with apify)
+Testing Apify LinkedIn Scraper...
+📊 Fetching LinkedIn data for: google via Apify...
+📝 Calling Apify actor: scraper-engine/linkedin-company-post-scraper
+   URL: https://www.linkedin.com/company/google
+   Max posts: 20
+✅ Fetched 20 posts from LinkedIn
+🔍 RAW APIFY POST ITEM (First Item):
+{
+  "urn": "urn:li:activity:7423060511992496130",
+  "text": "It’s time for another Gemini Drops: Our regular update on what’s new in the Gemini app ✨\n\nThis month's updates include:\n\n• No-cost practice SATs\n• Personal Intelligence, which connects the dots across your Google apps to provide highly personalized help\n• Automating tasks with Gemini in Chrome\n• And more\n\nHere’s a look at everything new in Gemini ↓",
+  "url": "https://www.linkedin.com/posts/google_heres-whats-new-in-the-gemini-app-this-activity-7423060511992496130-bVUR",
+  "postedAtTimestamp": 1769795539810,
+  "postedAtISO": "2026-01-30T17:52:19.810000Z",
+  "timeSincePosted": "8h",
+  "isRepost": false,
+  "authorType": "Company",
+  "authorProfileUrl": "https://www.linkedin.com/company/google",
+  "authorProfileId": "331870",
+  "authorHeadline": "A problem isn't truly solved until it's solved for all. Googlers build products that help create opportunities for everyone, whether down the street or across the globe. Bring your insight, imagination and a healthy disregard for the impossible. Bring everything that makes you unique. Together, we can build for everyone.\n\nCheck out our career opportunities at goo.gle/3DLEokh",
+  "authorFullName": "Google",
+  "image": "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+  "type": "image",
+  "images": [
+    "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+    "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+    "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+    "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+    "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+  ],
+  "author": {
+    "firstName": null,
+    "lastName": null,
+    "occupation": "A problem isn't truly solved until it's solved for all. Googlers build products that help create opportunities for everyone, whether down the street or across the globe. Bring your insight, imagination and a healthy disregard for the impossible. Bring everything that makes you unique. Together, we can build for everyone.\n\nCheck out our career opportunities at goo.gle/3DLEokh",
+    "id": "331870",
+    "publicId": "google",
+    "trackingId": "sx17pT5jhO87Lazg+ref5g",
+    "profileId": "331870",
+    "picture": "https://media.licdn.com/dms/image/v2/D4E0BAQGv3cqOuUMY7g/company-logo_200_200/B4EZmhegXHGcAM-/0/1759350753990/google_logo?e=2147483647&v=beta&t=Hzaw0d0Yz1Yi-_mDuQ6JQo-Ph41AG50Z8pWjyaeTI0k",
+    "backgroundImage": ""
+  },
+  "authorName": "Google",
+  "authorTitle": "A problem isn't truly solved until it's solved for all. Googlers build products that help create opportunities for everyone, whether down the street or across the globe. Bring your insight, imagination and a healthy disregard for the impossible. Bring everything that makes you unique. Together, we can build for everyone.\n\nCheck out our career opportunities at goo.gle/3DLEokh",
+  "attributes": [],
+  "comments": [
+    {
+      "time": 1769824759637,
+      "link": "https://www.linkedin.com/signup/cold-join?session_redirect=https%3A%2F%2Fwww%2Elinkedin%2Ecom%2Fcompany%2Fgoogle&trk=organization_guest_main-feed-card_social-actions-comments",
+      "text": "Find people you know at Google",
+      "entities": [],
+      "pinned": false,
+      "originalLanguage": "English",
+      "author": {
+        "firstName": "",
+        "lastName": "",
+        "occupation": "",
+        "id": "commenter-8f1232cbe0f2",
+        "publicId": "unknown",
+        "trackingId": "JT186Or5dACIM5cwcnOIKA",
+        "profileId": "commenter-8f1232cbe0f2",
+        "picture": "",
+        "backgroundImage": "",
+        "distance": "OUT_OF_NETWORK"
+      }
+    },
+    {
+      "time": 1769824759650,
+      "link": "https://www.linkedin.com/signup/cold-join?session_redirect=https%3A%2F%2Fwww%2Elinkedin%2Ecom%2Fcompany%2Fgoogle&trk=organization_guest_main-feed-card_social-actions-comments",
+      "text": "Find people you know at Google",
+      "entities": [],
+      "pinned": false,
+      "originalLanguage": "English",
+      "author": {
+        "firstName": "",
+        "lastName": "",
+        "occupation": "",
+        "id": "commenter-8f1232cbe0f2",
+        "publicId": "unknown",
+        "trackingId": "eOoxt+Qmr6yGbXipExDAsw",
+        "profileId": "commenter-8f1232cbe0f2",
+        "picture": "",
+        "backgroundImage": "",
+        "distance": "OUT_OF_NETWORK"
+      }
+    },
+    {
+      "time": 1769824759698,
+      "link": "https://www.linkedin.com/feed/update/urn:li:activity:7423060511992496130",
+      "text": "Language",
+      "entities": [],
+      "pinned": false,
+      "originalLanguage": "English",
+      "author": {
+        "firstName": "",
+        "lastName": "",
+        "occupation": "",
+        "id": "commenter-4994a8ffeba4",
+        "publicId": "unknown",
+        "trackingId": "I0CZnvducoGGo8JJ7YioRQ",
+        "profileId": "commenter-4994a8ffeba4",
+        "picture": "",
+        "backgroundImage": "",
+        "distance": "OUT_OF_NETWORK"
+      }
+    }
+  ],
+  "reactions": [],
+  "numShares": 0,
+  "numLikes": 330,
+  "numComments": 50,
+  "commentsTruncated": true,
+  "commentsComplete": false,
+  "reactionsTruncated": true,
+  "canReact": true,
+  "canPostComments": true,
+  "canShare": true,
+  "commentingDisabled": false,
+  "allowedCommentersScope": "ALL",
+  "rootShare": true,
+  "shareAudience": "PUBLIC"
+}
+📊 Processed 20 posts for Google
+   Total Engagement: 11673
+   Avg Engagement/Post: 583.6
+   Reputation Score: 100/100
+✅ LinkedIn data fetched successfully for google
+Result: {
+  "dataAvailable": true,
+  "companyName": "Google",
+  "companyUrl": "https://www.linkedin.com/company/google",
+  "companyUrn": null,
+  "companyFollowers": 0,
+  "username": "google",
+  "source": "apify-linkedin",
+  "scrapedPostsCount": 20,
+  "metrics": {
+    "avgInteractions": 583.65,
+    "avgLikes": 528.25,
+    "avgComments": 55.4,
+    "avgShares": 0
+  },
+  "engagementScore": {
+    "likes": 10565,
+    "comments": 1108,
+    "shares": 0,
+    "totalReactions": 10565,
+    "engagementRate": 0,
+    "reach": 0
+  },
+  "topPosts": [
+    {
+      "text": "We asked Parisa Tabriz, VP of Google Chrome, to share 3 ways you can use the new AI features coming to Chrome — including a new side panel for better multitasking and a new way to connect apps like Gmail, Calendar, YouTube and more. All these features are made to help you get more done, quickly.\n\nLearn more → https://goo.gle/49NjO3W",
+      "postedAt": 1769631632438,
+      "postedDate": "2026-01-28T20:20:32.438000Z",
+      "url": "https://www.linkedin.com/posts/google_we-asked-parisa-tabriz-vp-of-google-chrome-activity-7422373034532995072-DX1u",
+      "likes": 1476,
+      "comments": 117,
+      "reposts": 0,
+      "totalReactions": 1476,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U",
+        "https://media.licdn.com/dms/image/v2/D5610AQGVJtcZYxx_xQ/image-shrink_1280/B56ZwA_oLbIQAc-/0/1769543206236?e=2147483647&v=beta&t=-0WECebgo4aT4vCe8FT067Mc57tMaWC7axLp6ZdMTM8",
+        "https://media.licdn.com/dms/image/v2/D5610AQHusGhjz-aS2A/image-shrink_1280/B56ZwA_oWBKsAc-/0/1769543206969?e=2147483647&v=beta&t=B79D5IqPcF7mfvyzgxTh2pB7bgBaEUxTVOZDGD568wc",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQEBhp9ch_ZyPA/crunchbase_investor_logo_100/B4DZqeuLX8GwAM-/0/1763599497115?e=1770429600&v=beta&t=pW5ypckI6I1hxKoRDb4Zh00wYvK2dS_KCKh4Mv6enYk"
+      ],
+      "engagement": 1593
+    },
+    {
+      "text": "Meet Personal Intelligence in AI Mode in Search 🔍✨\n\nNow, you can securely connect Search to Google apps like Gmail and Google Photos to get responses that are uniquely relevant to *you*.\n\nThe ability to connect AI Mode to your Gmail and Google Photos is rolling out as a Labs feature. Eligible Google AI Pro and Ultra subscribers in English in the U.S. will automatically have access to the feature as it becomes available.\n\nHere’s VP of Product for Google Search, Robby Stein, on how this makes Search even more helpful ↓\n\nLearn more: goo.gle/4jUZVLC ",
+      "postedAt": 1769113452773,
+      "postedDate": "2026-01-22T20:24:12.773000Z",
+      "url": "https://www.linkedin.com/posts/google_meet-personal-intelligence-in-ai-mode-in-activity-7420199631491354626-3Tgl",
+      "likes": 917,
+      "comments": 88,
+      "reposts": 0,
+      "totalReactions": 917,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D5610AQHusGhjz-aS2A/image-shrink_1280/B56ZwA_oWBKsAc-/0/1769543206969?e=2147483647&v=beta&t=B79D5IqPcF7mfvyzgxTh2pB7bgBaEUxTVOZDGD568wc",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQEBhp9ch_ZyPA/crunchbase_investor_logo_100/B4DZqeuLX8GwAM-/0/1763599497115?e=1770429600&v=beta&t=pW5ypckI6I1hxKoRDb4Zh00wYvK2dS_KCKh4Mv6enYk",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQGQ81oCgkizHg/crunchbase_investor_logo_100/B4DZqeuLX2H4AM-/0/1763599497127?e=1770429600&v=beta&t=RWQQ_20_kAXUIvjaot6EyDopfw1qlwB7CXICWrOxeuQ",
+        "https://media.licdn.com/dms/image/v2/D4E3DAQF9IllQa8SlWQ/image-scale_191_1128/B4EZvC.IhUKgAc-/0/1768502626885/google_cover?e=2147483647&v=beta&t=SGcxE-CvSCOcb0yooHG0la4MuGV_PnG9T0dMZOV8miM"
+      ],
+      "engagement": 1005
+    },
+    {
+      "text": "It’s time for another Gemini Drops: Our regular update on what’s new in the Gemini app ✨\n\nThis month's updates include:\n\n• No-cost practice SATs\n• Personal Intelligence, which connects the dots across your Google apps to provide highly personalized help\n• Automating tasks with Gemini in Chrome\n• And more\n\nHere’s a look at everything new in Gemini ↓",
+      "postedAt": 1769795539810,
+      "postedDate": "2026-01-30T17:52:19.810000Z",
+      "url": "https://www.linkedin.com/posts/google_heres-whats-new-in-the-gemini-app-this-activity-7423060511992496130-bVUR",
+      "likes": 785,
+      "comments": 66,
+      "reposts": 0,
+      "totalReactions": 785,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D4E3DAQF9IllQa8SlWQ/image-scale_191_1128/B4EZvC.IhUKgAc-/0/1768502626885/google_cover?e=2147483647&v=beta&t=SGcxE-CvSCOcb0yooHG0la4MuGV_PnG9T0dMZOV8miM"
+      ],
+      "engagement": 851
+    },
+    {
+      "text": "Search has always helped you access the world’s information and find what you need. Now, it can more seamlessly bring together that same global knowledge with insights that are uniquely relevant to you.\n\n✨ Introducing Personal Intelligence — now in AI Mode.\n\nWith Personal Intelligence, you can choose to securely connect Search to Google apps like Gmail and Photos for helpful responses that are tailored to you.\n\nThe ability to connect AI Mode to your Gmail and Google Photos is rolling out as a Labs feature. Eligible Google AI Pro and Ultra subscribers in English in the U.S. will automatically have access to the feature as it becomes available. \n\nLearn more → goo.gle/4jUZVLC",
+      "postedAt": 1769097855550,
+      "postedDate": "2026-01-22T16:04:15.550000Z",
+      "url": "https://www.linkedin.com/posts/google_search-has-always-helped-you-access-the-world-activity-7420134212025892864-1IX8",
+      "likes": 756,
+      "comments": 70,
+      "reposts": 0,
+      "totalReactions": 756,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQGQ81oCgkizHg/crunchbase_investor_logo_100/B4DZqeuLX2H4AM-/0/1763599497127?e=1770429600&v=beta&t=RWQQ_20_kAXUIvjaot6EyDopfw1qlwB7CXICWrOxeuQ",
+        "https://media.licdn.com/dms/image/v2/D4E3DAQF9IllQa8SlWQ/image-scale_191_1128/B4EZvC.IhUKgAc-/0/1768502626885/google_cover?e=2147483647&v=beta&t=SGcxE-CvSCOcb0yooHG0la4MuGV_PnG9T0dMZOV8miM"
+      ],
+      "engagement": 826
+    },
+    {
+      "text": "Meet Devansh, a software engineer (SWE) based in our New York City office. For Devansh, working at Google wasn’t always on his career roadmap. “When I was in school, I was very torn between staying in academia to pursue a PhD in algorithms research, or working in industry and pursuing a security-related job,” he explained. However, after a stint at a small cybersecurity company, Devansh knew he wanted to further explore industry opportunities — and he wanted to do it at a global scale. Now a SWE on one of Google Cloud’s security teams, Devansh builds tools and services that allow Cloud customers to monitor and verify the security of their data.\n\nDevansh shared a crucial piece of advice for students interested in following his footsteps. “Remember: people are not as scary as they seem! As a student, I used to be so intimidated to reach out and ask for help. Whether for networking, problem-solving, debugging or even just career advice, I find that so many people are very willing and supportive to share their experience or advice if you just ask.” In short: “Just reach out!”\n\nWant to make an impact like Devansh? Explore our open roles and career opportunities → https://goo.gle/49BiVLO\n",
+      "postedAt": 1769721049347,
+      "postedDate": "2026-01-29T21:10:49.347000Z",
+      "url": "https://www.linkedin.com/posts/google_meet-devansh-a-software-engineer-swe-based-activity-7422748076227993601-H2Qx",
+      "likes": 714,
+      "comments": 38,
+      "reposts": 0,
+      "totalReactions": 714,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U",
+        "https://media.licdn.com/dms/image/v2/D5610AQGVJtcZYxx_xQ/image-shrink_1280/B56ZwA_oLbIQAc-/0/1769543206236?e=2147483647&v=beta&t=-0WECebgo4aT4vCe8FT067Mc57tMaWC7axLp6ZdMTM8"
+      ],
+      "engagement": 752
+    }
+  ],
+  "allPosts": [
+    {
+      "text": "We asked Parisa Tabriz, VP of Google Chrome, to share 3 ways you can use the new AI features coming to Chrome — including a new side panel for better multitasking and a new way to connect apps like Gmail, Calendar, YouTube and more. All these features are made to help you get more done, quickly.\n\nLearn more → https://goo.gle/49NjO3W",
+      "postedAt": 1769631632438,
+      "postedDate": "2026-01-28T20:20:32.438000Z",
+      "url": "https://www.linkedin.com/posts/google_we-asked-parisa-tabriz-vp-of-google-chrome-activity-7422373034532995072-DX1u",
+      "likes": 1476,
+      "comments": 117,
+      "reposts": 0,
+      "totalReactions": 1476,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U",
+        "https://media.licdn.com/dms/image/v2/D5610AQGVJtcZYxx_xQ/image-shrink_1280/B56ZwA_oLbIQAc-/0/1769543206236?e=2147483647&v=beta&t=-0WECebgo4aT4vCe8FT067Mc57tMaWC7axLp6ZdMTM8",
+        "https://media.licdn.com/dms/image/v2/D5610AQHusGhjz-aS2A/image-shrink_1280/B56ZwA_oWBKsAc-/0/1769543206969?e=2147483647&v=beta&t=B79D5IqPcF7mfvyzgxTh2pB7bgBaEUxTVOZDGD568wc",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQEBhp9ch_ZyPA/crunchbase_investor_logo_100/B4DZqeuLX8GwAM-/0/1763599497115?e=1770429600&v=beta&t=pW5ypckI6I1hxKoRDb4Zh00wYvK2dS_KCKh4Mv6enYk"
+      ],
+      "engagement": 1593
+    },
+    {
+      "text": "Meet Personal Intelligence in AI Mode in Search 🔍✨\n\nNow, you can securely connect Search to Google apps like Gmail and Google Photos to get responses that are uniquely relevant to *you*.\n\nThe ability to connect AI Mode to your Gmail and Google Photos is rolling out as a Labs feature. Eligible Google AI Pro and Ultra subscribers in English in the U.S. will automatically have access to the feature as it becomes available.\n\nHere’s VP of Product for Google Search, Robby Stein, on how this makes Search even more helpful ↓\n\nLearn more: goo.gle/4jUZVLC ",
+      "postedAt": 1769113452773,
+      "postedDate": "2026-01-22T20:24:12.773000Z",
+      "url": "https://www.linkedin.com/posts/google_meet-personal-intelligence-in-ai-mode-in-activity-7420199631491354626-3Tgl",
+      "likes": 917,
+      "comments": 88,
+      "reposts": 0,
+      "totalReactions": 917,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D5610AQHusGhjz-aS2A/image-shrink_1280/B56ZwA_oWBKsAc-/0/1769543206969?e=2147483647&v=beta&t=B79D5IqPcF7mfvyzgxTh2pB7bgBaEUxTVOZDGD568wc",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQEBhp9ch_ZyPA/crunchbase_investor_logo_100/B4DZqeuLX8GwAM-/0/1763599497115?e=1770429600&v=beta&t=pW5ypckI6I1hxKoRDb4Zh00wYvK2dS_KCKh4Mv6enYk",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQGQ81oCgkizHg/crunchbase_investor_logo_100/B4DZqeuLX2H4AM-/0/1763599497127?e=1770429600&v=beta&t=RWQQ_20_kAXUIvjaot6EyDopfw1qlwB7CXICWrOxeuQ",
+        "https://media.licdn.com/dms/image/v2/D4E3DAQF9IllQa8SlWQ/image-scale_191_1128/B4EZvC.IhUKgAc-/0/1768502626885/google_cover?e=2147483647&v=beta&t=SGcxE-CvSCOcb0yooHG0la4MuGV_PnG9T0dMZOV8miM"
+      ],
+      "engagement": 1005
+    },
+    {
+      "text": "It’s time for another Gemini Drops: Our regular update on what’s new in the Gemini app ✨\n\nThis month's updates include:\n\n• No-cost practice SATs\n• Personal Intelligence, which connects the dots across your Google apps to provide highly personalized help\n• Automating tasks with Gemini in Chrome\n• And more\n\nHere’s a look at everything new in Gemini ↓",
+      "postedAt": 1769795539810,
+      "postedDate": "2026-01-30T17:52:19.810000Z",
+      "url": "https://www.linkedin.com/posts/google_heres-whats-new-in-the-gemini-app-this-activity-7423060511992496130-bVUR",
+      "likes": 785,
+      "comments": 66,
+      "reposts": 0,
+      "totalReactions": 785,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D4E3DAQF9IllQa8SlWQ/image-scale_191_1128/B4EZvC.IhUKgAc-/0/1768502626885/google_cover?e=2147483647&v=beta&t=SGcxE-CvSCOcb0yooHG0la4MuGV_PnG9T0dMZOV8miM"
+      ],
+      "engagement": 851
+    },
+    {
+      "text": "Search has always helped you access the world’s information and find what you need. Now, it can more seamlessly bring together that same global knowledge with insights that are uniquely relevant to you.\n\n✨ Introducing Personal Intelligence — now in AI Mode.\n\nWith Personal Intelligence, you can choose to securely connect Search to Google apps like Gmail and Photos for helpful responses that are tailored to you.\n\nThe ability to connect AI Mode to your Gmail and Google Photos is rolling out as a Labs feature. Eligible Google AI Pro and Ultra subscribers in English in the U.S. will automatically have access to the feature as it becomes available. \n\nLearn more → goo.gle/4jUZVLC",
+      "postedAt": 1769097855550,
+      "postedDate": "2026-01-22T16:04:15.550000Z",
+      "url": "https://www.linkedin.com/posts/google_search-has-always-helped-you-access-the-world-activity-7420134212025892864-1IX8",
+      "likes": 756,
+      "comments": 70,
+      "reposts": 0,
+      "totalReactions": 756,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQGQ81oCgkizHg/crunchbase_investor_logo_100/B4DZqeuLX2H4AM-/0/1763599497127?e=1770429600&v=beta&t=RWQQ_20_kAXUIvjaot6EyDopfw1qlwB7CXICWrOxeuQ",
+        "https://media.licdn.com/dms/image/v2/D4E3DAQF9IllQa8SlWQ/image-scale_191_1128/B4EZvC.IhUKgAc-/0/1768502626885/google_cover?e=2147483647&v=beta&t=SGcxE-CvSCOcb0yooHG0la4MuGV_PnG9T0dMZOV8miM"
+      ],
+      "engagement": 826
+    },
+    {
+      "text": "Meet Devansh, a software engineer (SWE) based in our New York City office. For Devansh, working at Google wasn’t always on his career roadmap. “When I was in school, I was very torn between staying in academia to pursue a PhD in algorithms research, or working in industry and pursuing a security-related job,” he explained. However, after a stint at a small cybersecurity company, Devansh knew he wanted to further explore industry opportunities — and he wanted to do it at a global scale. Now a SWE on one of Google Cloud’s security teams, Devansh builds tools and services that allow Cloud customers to monitor and verify the security of their data.\n\nDevansh shared a crucial piece of advice for students interested in following his footsteps. “Remember: people are not as scary as they seem! As a student, I used to be so intimidated to reach out and ask for help. Whether for networking, problem-solving, debugging or even just career advice, I find that so many people are very willing and supportive to share their experience or advice if you just ask.” In short: “Just reach out!”\n\nWant to make an impact like Devansh? Explore our open roles and career opportunities → https://goo.gle/49BiVLO\n",
+      "postedAt": 1769721049347,
+      "postedDate": "2026-01-29T21:10:49.347000Z",
+      "url": "https://www.linkedin.com/posts/google_meet-devansh-a-software-engineer-swe-based-activity-7422748076227993601-H2Qx",
+      "likes": 714,
+      "comments": 38,
+      "reposts": 0,
+      "totalReactions": 714,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U",
+        "https://media.licdn.com/dms/image/v2/D5610AQGVJtcZYxx_xQ/image-shrink_1280/B56ZwA_oLbIQAc-/0/1769543206236?e=2147483647&v=beta&t=-0WECebgo4aT4vCe8FT067Mc57tMaWC7axLp6ZdMTM8"
+      ],
+      "engagement": 752
+    },
+    {
+      "text": "Introducing Project Genie: An experimental research prototype powered by Genie 3, our world model, that lets you prompt an interactive world into existence — and then step inside. 🌎\n\nLast year, we previewed Genie 3, a general-purpose world model capable of generating diverse, interactive environments. Now, we’re taking the next step with a dedicated, interactive prototype focused on immersive world creation — powered by Genie 3, Nano Banana, and Gemini.\n\nProject Genie allows you to create and explore your own worlds as they generate in real time around you, simulating real-world physics and interactions as you move.\n\nBuilding AGI requires systems that navigate the diversity of the real world — and world models like Genie are an important step toward meeting that challenge. It's rolling out today to Google AI Ultra subscribers in the U.S. (18+).\n\nWe can’t wait to see the worlds you build. Learn more → goo.gle/4tlCFuG",
+      "postedAt": 1769706275676,
+      "postedDate": "2026-01-29T17:04:35.676000Z",
+      "url": "https://www.linkedin.com/posts/google_introducing-project-genie-an-experimental-activity-7422686110964785152-P2EY",
+      "likes": 695,
+      "comments": 32,
+      "reposts": 0,
+      "totalReactions": 695,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U",
+        "https://media.licdn.com/dms/image/v2/D5610AQGVJtcZYxx_xQ/image-shrink_1280/B56ZwA_oLbIQAc-/0/1769543206236?e=2147483647&v=beta&t=-0WECebgo4aT4vCe8FT067Mc57tMaWC7axLp6ZdMTM8",
+        "https://media.licdn.com/dms/image/v2/D5610AQHusGhjz-aS2A/image-shrink_1280/B56ZwA_oWBKsAc-/0/1769543206969?e=2147483647&v=beta&t=B79D5IqPcF7mfvyzgxTh2pB7bgBaEUxTVOZDGD568wc"
+      ],
+      "engagement": 727
+    },
+    {
+      "text": "It turns out one of the quickest ways to bring Googlers together is to put them in a room… and give them something tricky to figure out. Enter Escape the Office, a Google-themed escape room team-building activity that thousands of Googlers have participated in.\n\nDuring remote work, a small team of Googlers designed a virtual escape room to help teams stay engaged with each other while working from home. It quickly evolved into an in-person experience run by a team of volunteers that’s now available in nine Google offices worldwide. From Bangalore to Zurich, teams solve puzzle challenges created with everyday office items by collaborating in unexpected ways.\n\n “Googlers were hungry for connection… and they continued to be,” explains Minh, one of the creators. “Googlers get to discover colleagues they haven't met yet while unlocking a stronger understanding of the people they work with every day.”\n\nFor global admin Laurentiu, watching teams come together remains the best part: “The chance to help keep Google’s culture of connection and creativity alive is the greatest reward of all.”\n",
+      "postedAt": 1769543207931,
+      "postedDate": "2026-01-27T19:46:47.931000Z",
+      "url": "https://www.linkedin.com/posts/google_it-turns-out-one-of-the-quickest-ways-to-activity-7422002155290648576-45H4",
+      "likes": 669,
+      "comments": 48,
+      "reposts": 0,
+      "totalReactions": 669,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D5610AQGVJtcZYxx_xQ/image-shrink_1280/B56ZwA_oLbIQAc-/0/1769543206236?e=2147483647&v=beta&t=-0WECebgo4aT4vCe8FT067Mc57tMaWC7axLp6ZdMTM8",
+        "https://media.licdn.com/dms/image/v2/D5610AQHusGhjz-aS2A/image-shrink_1280/B56ZwA_oWBKsAc-/0/1769543206969?e=2147483647&v=beta&t=B79D5IqPcF7mfvyzgxTh2pB7bgBaEUxTVOZDGD568wc",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQEBhp9ch_ZyPA/crunchbase_investor_logo_100/B4DZqeuLX8GwAM-/0/1763599497115?e=1770429600&v=beta&t=pW5ypckI6I1hxKoRDb4Zh00wYvK2dS_KCKh4Mv6enYk",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQGQ81oCgkizHg/crunchbase_investor_logo_100/B4DZqeuLX2H4AM-/0/1763599497127?e=1770429600&v=beta&t=RWQQ_20_kAXUIvjaot6EyDopfw1qlwB7CXICWrOxeuQ",
+        "https://media.licdn.com/dms/image/v2/D4E3DAQF9IllQa8SlWQ/image-scale_191_1128/B4EZvC.IhUKgAc-/0/1768502626885/google_cover?e=2147483647&v=beta&t=SGcxE-CvSCOcb0yooHG0la4MuGV_PnG9T0dMZOV8miM"
+      ],
+      "engagement": 717
+    },
+    {
+      "text": "We’re introducing major updates to Gemini in Chrome for MacOS, Windows and Chromebook Plus, starting today in the U.S. — like a new side panel experience, Connected Apps, Nano Banana and more. Built on Gemini 3, our most intelligent model, these powerful new AI features can help you get the most out of the web.\n\nSwipe through to preview a few of them, then learn more about the new era of browsing in Chrome → https://goo.gle/49NjO3W",
+      "postedAt": 1769626225520,
+      "postedDate": "2026-01-28T18:50:25.520000Z",
+      "url": "https://www.linkedin.com/posts/google_the-new-era-of-browsing-putting-gemini-to-activity-7422350356270964736-yFUq",
+      "likes": 533,
+      "comments": 48,
+      "reposts": 0,
+      "totalReactions": 533,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U",
+        "https://media.licdn.com/dms/image/v2/D5610AQGVJtcZYxx_xQ/image-shrink_1280/B56ZwA_oLbIQAc-/0/1769543206236?e=2147483647&v=beta&t=-0WECebgo4aT4vCe8FT067Mc57tMaWC7axLp6ZdMTM8",
+        "https://media.licdn.com/dms/image/v2/D5610AQHusGhjz-aS2A/image-shrink_1280/B56ZwA_oWBKsAc-/0/1769543206969?e=2147483647&v=beta&t=B79D5IqPcF7mfvyzgxTh2pB7bgBaEUxTVOZDGD568wc",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQEBhp9ch_ZyPA/crunchbase_investor_logo_100/B4DZqeuLX8GwAM-/0/1763599497115?e=1770429600&v=beta&t=pW5ypckI6I1hxKoRDb4Zh00wYvK2dS_KCKh4Mv6enYk",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQGQ81oCgkizHg/crunchbase_investor_logo_100/B4DZqeuLX2H4AM-/0/1763599497127?e=1770429600&v=beta&t=RWQQ_20_kAXUIvjaot6EyDopfw1qlwB7CXICWrOxeuQ"
+      ],
+      "engagement": 581
+    },
+    {
+      "text": "Meet Dooglers (and their Googlers) from Google offices and data centers around the globe. From midday brain boosting walks to sparking conversations with coworkers, see how Dooglers can boost creativity, connection and productivity at Google.\n\nWant to join the team? Explore our open roles → https://goo.gle/4sTnecH",
+      "postedAt": 1769105331179,
+      "postedDate": "2026-01-22T18:08:51.179000Z",
+      "url": "https://www.linkedin.com/posts/google_meet-dooglers-and-their-googlers-from-google-activity-7420165567057272832-uJyO",
+      "likes": 390,
+      "comments": 51,
+      "reposts": 0,
+      "totalReactions": 390,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQEBhp9ch_ZyPA/crunchbase_investor_logo_100/B4DZqeuLX8GwAM-/0/1763599497115?e=1770429600&v=beta&t=pW5ypckI6I1hxKoRDb4Zh00wYvK2dS_KCKh4Mv6enYk",
+        "https://media.licdn.com/dms/image/sync/v2/D4D38AQGQ81oCgkizHg/crunchbase_investor_logo_100/B4DZqeuLX2H4AM-/0/1763599497127?e=1770429600&v=beta&t=RWQQ_20_kAXUIvjaot6EyDopfw1qlwB7CXICWrOxeuQ",
+        "https://media.licdn.com/dms/image/v2/D4E3DAQF9IllQa8SlWQ/image-scale_191_1128/B4EZvC.IhUKgAc-/0/1768502626885/google_cover?e=2147483647&v=beta&t=SGcxE-CvSCOcb0yooHG0la4MuGV_PnG9T0dMZOV8miM"
+      ],
+      "engagement": 441
+    },
+    {
+      "text": "It’s time for another Gemini Drops: Our regular update on what’s new in the Gemini app ✨\n\nThis month's updates include:\n\n• No-cost practice SATs\n• Personal Intelligence, which connects the dots across your Google apps to provide highly personalized help\n• Automating tasks with Gemini in Chrome\n• And more\n\nHere’s a look at everything new in Gemini ↓",
+      "postedAt": 1769795539810,
+      "postedDate": "2026-01-30T17:52:19.810000Z",
+      "url": "https://www.linkedin.com/posts/google_heres-whats-new-in-the-gemini-app-this-activity-7423060511992496130-bVUR",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "It’s time for another Gemini Drops: Our regular update on what’s new in the Gemini app ✨\n\nThis month's updates include:\n\n• No-cost practice SATs\n• Personal Intelligence, which connects the dots across your Google apps to provide highly personalized help\n• Automating tasks with Gemini in Chrome\n• And more\n\nHere’s a look at everything new in Gemini ↓",
+      "postedAt": 1769795539810,
+      "postedDate": "2026-01-30T17:52:19.810000Z",
+      "url": "https://www.linkedin.com/posts/google_heres-whats-new-in-the-gemini-app-this-activity-7423060511992496130-bVUR",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "Meet Devansh, a software engineer (SWE) based in our New York City office. For Devansh, working at Google wasn’t always on his career roadmap. “When I was in school, I was very torn between staying in academia to pursue a PhD in algorithms research, or working in industry and pursuing a security-related job,” he explained. However, after a stint at a small cybersecurity company, Devansh knew he wanted to further explore industry opportunities — and he wanted to do it at a global scale. Now a SWE on one of Google Cloud’s security teams, Devansh builds tools and services that allow Cloud customers to monitor and verify the security of their data.\n\nDevansh shared a crucial piece of advice for students interested in following his footsteps. “Remember: people are not as scary as they seem! As a student, I used to be so intimidated to reach out and ask for help. Whether for networking, problem-solving, debugging or even just career advice, I find that so many people are very willing and supportive to share their experience or advice if you just ask.” In short: “Just reach out!”\n\nWant to make an impact like Devansh? Explore our open roles and career opportunities → https://goo.gle/49BiVLO\n",
+      "postedAt": 1769721049347,
+      "postedDate": "2026-01-29T21:10:49.347000Z",
+      "url": "https://www.linkedin.com/posts/google_meet-devansh-a-software-engineer-swe-based-activity-7422748076227993601-H2Qx",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "Meet Devansh, a software engineer (SWE) based in our New York City office. For Devansh, working at Google wasn’t always on his career roadmap. “When I was in school, I was very torn between staying in academia to pursue a PhD in algorithms research, or working in industry and pursuing a security-related job,” he explained. However, after a stint at a small cybersecurity company, Devansh knew he wanted to further explore industry opportunities — and he wanted to do it at a global scale. Now a SWE on one of Google Cloud’s security teams, Devansh builds tools and services that allow Cloud customers to monitor and verify the security of their data.\n\nDevansh shared a crucial piece of advice for students interested in following his footsteps. “Remember: people are not as scary as they seem! As a student, I used to be so intimidated to reach out and ask for help. Whether for networking, problem-solving, debugging or even just career advice, I find that so many people are very willing and supportive to share their experience or advice if you just ask.” In short: “Just reach out!”\n\nWant to make an impact like Devansh? Explore our open roles and career opportunities → https://goo.gle/49BiVLO\n",
+      "postedAt": 1769721049347,
+      "postedDate": "2026-01-29T21:10:49.347000Z",
+      "url": "https://www.linkedin.com/posts/google_meet-devansh-a-software-engineer-swe-based-activity-7422748076227993601-H2Qx",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "Introducing Project Genie: An experimental research prototype powered by Genie 3, our world model, that lets you prompt an interactive world into existence — and then step inside. 🌎\n\nLast year, we previewed Genie 3, a general-purpose world model capable of generating diverse, interactive environments. Now, we’re taking the next step with a dedicated, interactive prototype focused on immersive world creation — powered by Genie 3, Nano Banana, and Gemini.\n\nProject Genie allows you to create and explore your own worlds as they generate in real time around you, simulating real-world physics and interactions as you move.\n\nBuilding AGI requires systems that navigate the diversity of the real world — and world models like Genie are an important step toward meeting that challenge. It's rolling out today to Google AI Ultra subscribers in the U.S. (18+).\n\nWe can’t wait to see the worlds you build. Learn more → goo.gle/4tlCFuG",
+      "postedAt": 1769706275676,
+      "postedDate": "2026-01-29T17:04:35.676000Z",
+      "url": "https://www.linkedin.com/posts/google_introducing-project-genie-an-experimental-activity-7422686110964785152-P2EY",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "We asked Parisa Tabriz, VP of Google Chrome, to share 3 ways you can use the new AI features coming to Chrome — including a new side panel for better multitasking and a new way to connect apps like Gmail, Calendar, YouTube and more. All these features are made to help you get more done, quickly.\n\nLearn more → https://goo.gle/49NjO3W",
+      "postedAt": 1769631632438,
+      "postedDate": "2026-01-28T20:20:32.438000Z",
+      "url": "https://www.linkedin.com/posts/google_we-asked-parisa-tabriz-vp-of-google-chrome-activity-7422373034532995072-DX1u",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "We’re introducing major updates to Gemini in Chrome for MacOS, Windows and Chromebook Plus, starting today in the U.S. — like a new side panel experience, Connected Apps, Nano Banana and more. Built on Gemini 3, our most intelligent model, these powerful new AI features can help you get the most out of the web.\n\nSwipe through to preview a few of them, then learn more about the new era of browsing in Chrome → https://goo.gle/49NjO3W",
+      "postedAt": 1769626225520,
+      "postedDate": "2026-01-28T18:50:25.520000Z",
+      "url": "https://www.linkedin.com/posts/google_the-new-era-of-browsing-putting-gemini-to-activity-7422350356270964736-yFUq",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "It turns out one of the quickest ways to bring Googlers together is to put them in a room… and give them something tricky to figure out. Enter Escape the Office, a Google-themed escape room team-building activity that thousands of Googlers have participated in.\n\nDuring remote work, a small team of Googlers designed a virtual escape room to help teams stay engaged with each other while working from home. It quickly evolved into an in-person experience run by a team of volunteers that’s now available in nine Google offices worldwide. From Bangalore to Zurich, teams solve puzzle challenges created with everyday office items by collaborating in unexpected ways.\n\n “Googlers were hungry for connection… and they continued to be,” explains Minh, one of the creators. “Googlers get to discover colleagues they haven't met yet while unlocking a stronger understanding of the people they work with every day.”\n\nFor global admin Laurentiu, watching teams come together remains the best part: “The chance to help keep Google’s culture of connection and creativity alive is the greatest reward of all.”\n",
+      "postedAt": 1769543207931,
+      "postedDate": "2026-01-27T19:46:47.931000Z",
+      "url": "https://www.linkedin.com/posts/google_it-turns-out-one-of-the-quickest-ways-to-activity-7422002155290648576-45H4",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "Meet Personal Intelligence in AI Mode in Search 🔍✨\n\nNow, you can securely connect Search to Google apps like Gmail and Google Photos to get responses that are uniquely relevant to *you*.\n\nThe ability to connect AI Mode to your Gmail and Google Photos is rolling out as a Labs feature. Eligible Google AI Pro and Ultra subscribers in English in the U.S. will automatically have access to the feature as it becomes available.\n\nHere’s VP of Product for Google Search, Robby Stein, on how this makes Search even more helpful ↓\n\nLearn more: goo.gle/4jUZVLC ",
+      "postedAt": 1769113452773,
+      "postedDate": "2026-01-22T20:24:12.773000Z",
+      "url": "https://www.linkedin.com/posts/google_meet-personal-intelligence-in-ai-mode-in-activity-7420199631491354626-3Tgl",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "Meet Dooglers (and their Googlers) from Google offices and data centers around the globe. From midday brain boosting walks to sparking conversations with coworkers, see how Dooglers can boost creativity, connection and productivity at Google.\n\nWant to join the team? Explore our open roles → https://goo.gle/4sTnecH",
+      "postedAt": 1769105331179,
+      "postedDate": "2026-01-22T18:08:51.179000Z",
+      "url": "https://www.linkedin.com/posts/google_meet-dooglers-and-their-googlers-from-google-activity-7420165567057272832-uJyO",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    },
+    {
+      "text": "Search has always helped you access the world’s information and find what you need. Now, it can more seamlessly bring together that same global knowledge with insights that are uniquely relevant to you.\n\n✨ Introducing Personal Intelligence — now in AI Mode.\n\nWith Personal Intelligence, you can choose to securely connect Search to Google apps like Gmail and Photos for helpful responses that are tailored to you.\n\nThe ability to connect AI Mode to your Gmail and Google Photos is rolling out as a Labs feature. Eligible Google AI Pro and Ultra subscribers in English in the U.S. will automatically have access to the feature as it becomes available. \n\nLearn more → goo.gle/4jUZVLC",
+      "postedAt": 1769097855550,
+      "postedDate": "2026-01-22T16:04:15.550000Z",
+      "url": "https://www.linkedin.com/posts/google_search-has-always-helped-you-access-the-world-activity-7420134212025892864-1IX8",
+      "likes": 330,
+      "comments": 50,
+      "reposts": 0,
+      "totalReactions": 330,
+      "contentType": "image",
+      "images": [
+        "https://media.licdn.com/dms/image/sync/v2/D5627AQE11ex9mxP6gw/articleshare-shrink_800/B56ZwGnDeKIoAQ-/0/1769637427583?e=2147483647&v=beta&t=Rm_iEQfLKU9tNUuUlwnFiJ7AWyF-LdrAsaTkyEYATco",
+        "https://media.licdn.com/dms/image/v2/D5610AQE0Z6BApXoKVg/image-shrink_1280/B56ZwLl_hoIUAc-/0/1769721035140?e=2147483647&v=beta&t=TYHd5gpR_3QTuXKH4zkK_k4YlZR0fcSVOox8qA-G0AM",
+        "https://media.licdn.com/dms/image/v2/D5610AQEFpNCiuatLaw/image-shrink_1280/B56ZwLl_ufI4Ac-/0/1769721035966?e=2147483647&v=beta&t=wMppaJLR5KuZ3M3tYVXkMVbWrbmfWHJzOMHehse1VwM",
+        "https://media.licdn.com/dms/image/v2/D5610AQHpvBAyRePscA/image-shrink_1280/B56ZwLmAIZKkAc-/0/1769721038049?e=2147483647&v=beta&t=D-k9kfegEV3fE2IJZuauCWHFCLCI_eP48jczlHL0DRA",
+        "https://media.licdn.com/dms/image/v2/D5610AQHSNo7SccLhPg/image-shrink_1280/B56ZwA_oACHcAc-/0/1769543205335?e=2147483647&v=beta&t=PRfTQSRqUrRpKVn_3w8bqL1qeMmrIvycl8CVkT4N2_U"
+      ],
+      "engagement": 380
+    }
+  ],
+  "reputationBenchmark": {
+    "score": 100,
+    "followers": 0,
+    "avgEngagementRate": 0,
+    "sentiment": "Excellent",
+    "avgEngagementPerPost": 583.65
+  },
+  "lastUpdated": "2026-01-31T01:59:55.668Z"
+}

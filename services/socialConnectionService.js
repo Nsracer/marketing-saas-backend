@@ -32,7 +32,7 @@ class SocialConnectionService {
       if (error) throw error;
 
       const connections = {};
-      
+
       if (data && data.length > 0) {
         data.forEach(conn => {
           connections[conn.platform] = {
@@ -152,7 +152,7 @@ class SocialConnectionService {
   async getConnectionStatus(userEmail) {
     try {
       const handles = await this.getSocialHandlesWithPriority(userEmail);
-      
+
       const status = {
         facebook: {
           connected: handles.facebook?.connected || false,
@@ -227,11 +227,23 @@ class SocialConnectionService {
 
   /**
    * Disconnect a platform
+   * Also cleans up OAuth tokens and cached social media data
    */
   async disconnectPlatform(userEmail, platform) {
     try {
       console.log(`🔌 Disconnecting ${platform} for [USER_EMAIL]`);
 
+      // 1. Delete OAuth tokens so the platform shows as disconnected
+      console.log(`   🔑 Deleting OAuth tokens for ${platform}...`);
+      const oauthTokenService = (await import('./oauthTokenService.js')).default;
+      await oauthTokenService.deleteTokens(userEmail, platform);
+
+      // 2. Invalidate cached social media data so stale data isn't shown
+      console.log(`   🗑️ Invalidating social media cache for ${platform}...`);
+      const socialMediaCacheService = (await import('./socialMediaCacheService.js')).default;
+      await socialMediaCacheService.invalidateCache(userEmail, platform);
+
+      // 3. Update connection status in social_connections_v2 table
       const { error } = await supabase
         .from('social_connections_v2')
         .update({
@@ -245,7 +257,7 @@ class SocialConnectionService {
 
       if (error) throw error;
 
-      console.log(`✅ ${platform} disconnected`);
+      console.log(`✅ ${platform} disconnected (tokens removed, cache invalidated)`);
       return true;
 
     } catch (error) {
@@ -262,7 +274,7 @@ class SocialConnectionService {
       // Check actual OAuth tokens table - this is the source of truth
       const oauthTokenService = (await import('./oauthTokenService.js')).default;
       const hasValidTokens = await oauthTokenService.isConnected(userEmail, platform);
-      
+
       // Also check social_connections_v2 table for consistency
       const { data, error } = await supabase
         .from('social_connections_v2')

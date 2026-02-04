@@ -73,7 +73,8 @@ router.post('/analyze', validateCompetitorLimit, async (req, res) => {
       competitorFacebook,
       facebookCompetitorData,
       forceRefresh = false,
-      refreshSection = null  // 'seo' | 'technical' | 'content' | 'social' | null (null = full refresh)
+      refreshSection = null,  // 'seo' | 'technical' | 'content' | 'social' | null (null = full refresh)
+      linkedinOrganizationId = null  // Selected LinkedIn organization from Social Dashboard
     } = req.body;
 
     if (!email || !yourSite || !competitorSite) {
@@ -122,6 +123,7 @@ router.post('/analyze', validateCompetitorLimit, async (req, res) => {
     }
 
     console.log(`🔍 Analyzing competitor: ${competitorSite} for ${email}`);
+    console.log(`🔗 LinkedIn organization ID from request: ${linkedinOrganizationId || 'NOT PROVIDED'}`);
 
     // STEP 1: Validate GA/GSC connection (required for domain data)
     console.log('🔐 Step 1: Validating GA/GSC connection...');
@@ -148,15 +150,17 @@ router.post('/analyze', validateCompetitorLimit, async (req, res) => {
     const socialMediaCacheService = (await import('../services/socialMediaCacheService.js')).default;
 
     // Check which platforms are connected
-    const [fbConnected, igConnected, liConnected] = await Promise.all([
+    // Note: Instagram uses Facebook's OAuth token via Meta Graph API, so it's connected if Facebook is connected
+    const [fbConnected, liConnected] = await Promise.all([
       oauthTokenService.isConnected(email, 'facebook'),
-      oauthTokenService.isConnected(email, 'instagram'),
       oauthTokenService.isConnected(email, 'linkedin')
     ]);
+    // Instagram is connected if Facebook is connected (Meta Graph API)
+    const igConnected = fbConnected;
 
     console.log('🔗 Social connections:', {
       facebook: !!fbConnected,
-      instagram: !!igConnected,
+      instagram: !!igConnected,  // Uses Facebook OAuth
       linkedin: !!liConnected
     });
 
@@ -188,7 +192,7 @@ router.post('/analyze', validateCompetitorLimit, async (req, res) => {
     let [fbCache, igCache, liCache] = await Promise.all([
       fbConnected ? socialMediaCacheService.getCachedMetrics(email, 'facebook', 'month', true) : null,
       igConnected ? socialMediaCacheService.getCachedMetrics(email, 'instagram', 'month', true) : null,
-      liConnected ? socialMediaCacheService.getCachedMetrics(email, 'linkedin', 'month', true) : null
+      liConnected ? socialMediaCacheService.getCachedMetrics(email, 'linkedin', 'month', true, linkedinOrganizationId) : null
     ]);
 
     // Log available social media data (no re-fetching)
@@ -372,7 +376,7 @@ router.post('/analyze', validateCompetitorLimit, async (req, res) => {
         if (refreshSection === 'social') {
           // Refresh competitor social media only
           console.log(`📸 Refreshing competitor social media only...`);
-          const [compFacebookResult, compInstagramResult] = await Promise.allSettled([
+          const [compFacebookResult, compInstagramResult, compLinkedInResult] = await Promise.allSettled([
             (async () => {
               const compFbHandle = competitorFacebook || compFacebook;
               if (!compFbHandle) return null;
@@ -405,6 +409,20 @@ router.post('/analyze', validateCompetitorLimit, async (req, res) => {
                 };
               }
               return null;
+            })(),
+            (async () => {
+              const compLiHandle = compLinkedIn;
+              if (!compLiHandle) return null;
+
+              console.log(`💼 Refreshing LinkedIn data for: ${compLiHandle}`);
+              const linkedinRapidApiService = (await import('../services/linkedinRapidApiService.js')).default;
+              // Extract username from URL or use handle directly
+              const linkedinUsername = compLiHandle.includes('linkedin.com/company/')
+                ? compLiHandle.split('linkedin.com/company/')[1].split('/')[0].split('?')[0]
+                : compLiHandle;
+
+              const liData = await linkedinRapidApiService.getCompanyMetrics(linkedinUsername, 20);
+              return liData.dataAvailable ? liData : null;
             })()
           ]);
 
@@ -415,6 +433,10 @@ router.post('/analyze', validateCompetitorLimit, async (req, res) => {
           if (compInstagramResult.status === 'fulfilled' && compInstagramResult.value) {
             result.competitorSite.instagram = compInstagramResult.value;
           }
+          if (compLinkedInResult.status === 'fulfilled' && compLinkedInResult.value) {
+            result.competitorSite.linkedin = compLinkedInResult.value;
+          }
+
 
           // Update user social data from fresh cache (try to get latest even if we didn't fetch it above)
           // We re-fetch these to ensure we have the latest user data to pair with new competitor data
@@ -845,14 +867,15 @@ router.post('/analyze', validateCompetitorLimit, async (req, res) => {
         if (!compLiHandle) return null;
 
         try {
-          console.log(`💼 Starting LinkedIn scraper for: ${compLiHandle}`);
-          const linkedinScraperService = (await import('../services/linkedinScraperService.js')).default;
-          const linkedInUrl = compLiHandle.startsWith('http')
-            ? compLiHandle
-            : `https://www.linkedin.com/company/${compLiHandle}`;
+          console.log(`💼 Starting LinkedIn API fetch for: ${compLiHandle}`);
+          const linkedinRapidApiService = (await import('../services/linkedinRapidApiService.js')).default;
+          // Extract username from URL or use handle directly
+          const linkedinUsername = compLiHandle.includes('linkedin.com/company/')
+            ? compLiHandle.split('linkedin.com/company/')[1].split('/')[0].split('?')[0]
+            : compLiHandle;
 
           const liData = await Promise.race([
-            linkedinScraperService.scrapeCompanyPosts(linkedInUrl, 20),
+            linkedinRapidApiService.getCompanyMetrics(linkedinUsername, 20),
             new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 90000))
           ]);
 

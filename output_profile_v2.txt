@@ -1,0 +1,3 @@
+APIFY_API_KEY: Set
+Testing Apify actor: curious_coder/linkedin-company-scraper
+❌ Error: Input is not valid: Field input.cookie is required

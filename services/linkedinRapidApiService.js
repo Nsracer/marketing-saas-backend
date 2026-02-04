@@ -1,25 +1,30 @@
-// LinkedIn RapidAPI Service - Company Posts & Metrics
-import axios from 'axios';
+// LinkedIn Apify Service - Company Posts & Metrics
+// Uses Apify's LinkedIn Company Post Scraper instead of RapidAPI
+import { ApifyClient } from 'apify-client';
 
-class LinkedInRapidApiService {
+class LinkedInApifyService {
   constructor() {
-    this.rapidApiKey = process.env.RAPIDAPI_KEY;
-    if (!this.rapidApiKey) {
-      console.warn('⚠️ RAPIDAPI_KEY not configured');
+    this.apifyToken = process.env.APIFY_API_KEY || process.env.APIFY_API_TOKEN;
+    if (!this.apifyToken) {
+      console.warn('⚠️ APIFY_API_KEY not configured');
     }
-    this.baseUrl = 'https://linkedin-data-api.p.rapidapi.com';
+    // Actor ID from: https://apify.com/scraper-engine/linkedin-company-post-scraper
+    this.actorId = 'scraper-engine/linkedin-company-post-scraper';
+    this.client = new ApifyClient({
+      token: this.apifyToken,
+    });
     this.cache = new Map();
   }
 
   /**
    * Get company posts and calculate engagement metrics
-   * @param {string} username - LinkedIn company username
+   * @param {string} username - LinkedIn company username or URL
    * @param {number} maxPosts - Maximum number of posts to fetch (default: 20)
    * @returns {Object} Company metrics and posts
    */
   async getCompanyMetrics(username, maxPosts = 20) {
     try {
-      console.log(`📊 Fetching LinkedIn data for: ${username}`);
+      console.log(`📊 Fetching LinkedIn data for: ${username} via Apify...`);
 
       // Check cache first (1 hour)
       const cacheKey = `linkedin_${username}`;
@@ -29,35 +34,31 @@ class LinkedInRapidApiService {
         return cached.data;
       }
 
-      const options = {
-        method: 'GET',
-        url: `${this.baseUrl}/get-company-posts`,
-        params: {
-          username: username,
-          start: '0'
-        },
-        headers: {
-          'x-rapidapi-key': this.rapidApiKey,
-          'x-rapidapi-host': 'linkedin-data-api.p.rapidapi.com'
-        },
-        timeout: 15000
-      };
-
-      // Fetch profile first to get followers
-      let followers = 0;
-      try {
-        const profile = await this.getCompanyProfile(username);
-        if (profile.success && profile.followers) {
-          followers = profile.followers;
-        }
-      } catch (err) {
-        console.warn(`⚠️ Could not fetch profile for ${username}, followers will be 0`);
+      // Normalize the URL
+      let companyUrl;
+      if (username.startsWith('http')) {
+        companyUrl = username;
+      } else {
+        companyUrl = `https://www.linkedin.com/company/${username}`;
       }
 
-      const response = await axios.request(options);
-      const data = response.data;
+      console.log(`📝 Calling Apify actor: ${this.actorId}`);
+      console.log(`   URL: ${companyUrl}`);
+      console.log(`   Max posts: ${maxPosts}`);
 
-      if (!data.success || !data.data || data.data.length === 0) {
+      // Run the Apify actor (minimum 10 posts required by Apify)
+      const run = await this.client.actor(this.actorId).call({
+        urls: [companyUrl],
+        max_posts: Math.max(10, maxPosts)  // Apify requires minimum 10
+      }, {
+        timeout: 120, // 2 minute timeout
+        memory: 1024  // Reduce from default 4096MB to avoid hitting Apify free tier limit
+      });
+
+      // Get the results from the dataset
+      const { items: posts } = await this.client.dataset(run.defaultDatasetId).listItems();
+
+      if (!posts || posts.length === 0) {
         console.log(`⚠️ No posts found for ${username}`);
         return {
           dataAvailable: false,
@@ -66,8 +67,10 @@ class LinkedInRapidApiService {
         };
       }
 
+      console.log(`✅ Fetched ${posts.length} posts from LinkedIn`);
+
       // Process the data
-      const result = this.processCompanyData(data.data, username, followers);
+      const result = this.processCompanyData(posts, username);
 
       // Cache the result
       this.saveToCache(cacheKey, result);
@@ -87,50 +90,51 @@ class LinkedInRapidApiService {
 
   /**
    * Process company posts data into metrics
-   * @param {Array} posts - Array of posts from API
+   * @param {Array} posts - Array of posts from Apify
    * @param {string} username - Company username
-   * @param {number} followers - Company followers count
    * @returns {Object} Processed metrics
    */
-  processCompanyData(posts, username, followers = 0) {
-    // Limit to maxPosts
+  processCompanyData(posts, username) {
+    if (posts && posts.length > 0) {
+      console.log('🔍 RAW APIFY POST ITEM (First Item):');
+      console.log(JSON.stringify(posts[0], null, 2));
+      // throw new Error('DEBUG_STOP'); // Stop here to see the log
+    }
+
+    // Limit to 20 posts max
     const limitedPosts = posts.slice(0, 20);
 
     // Extract company info from first post
     const firstPost = limitedPosts[0];
-    const companyName = firstPost.author?.company?.name || username;
-    const companyUrl = firstPost.author?.company?.url || `https://www.linkedin.com/company/${username}`;
-    const companyUrn = firstPost.author?.company?.urn || null;
+    const companyName = firstPost.authorFullName || firstPost.authorName || username;
+    const companyUrl = firstPost.authorProfileUrl || `https://www.linkedin.com/company/${username}`;
 
     // Calculate engagement metrics
     let totalLikes = 0;
     let totalComments = 0;
-    let totalReposts = 0;
-    let totalReactions = 0;
+    let totalShares = 0;
 
     const processedPosts = limitedPosts.map(post => {
-      const likes = post.likeCount || 0;
-      const comments = post.commentsCount || 0;
-      const reposts = post.repostsCount || 0;
-      const reactions = post.totalReactionCount || 0;
+      const likes = post.numLikes || 0;
+      const comments = post.numComments || 0;
+      const shares = post.numShares || 0;
 
       totalLikes += likes;
       totalComments += comments;
-      totalReposts += reposts;
-      totalReactions += reactions;
+      totalShares += shares;
 
       return {
         text: post.text || '',
-        postedAt: post.postedAt,
-        postedDate: post.postedDate,
-        url: post.postUrl,
+        postedAt: post.postedAtTimestamp || post.Company_PostedAtTimestamp,
+        postedDate: post.postedAtISO || post.Company_PostedAtISO,
+        url: post.url,
         likes: likes,
         comments: comments,
-        reposts: reposts,
-        totalReactions: reactions,
-        contentType: post.contentType,
-        article: post.article || null,
-        engagement: likes + comments + reposts
+        reposts: shares,
+        totalReactions: likes,
+        contentType: post.type || 'unknown',
+        images: post.images || [],
+        engagement: likes + comments + shares
       };
     });
 
@@ -140,23 +144,17 @@ class LinkedInRapidApiService {
     // Calculate averages
     const avgLikes = totalLikes / limitedPosts.length;
     const avgComments = totalComments / limitedPosts.length;
-    const avgReposts = totalReposts / limitedPosts.length;
-    const totalEngagement = totalLikes + totalComments + totalReposts;
+    const avgShares = totalShares / limitedPosts.length;
+    const totalEngagement = totalLikes + totalComments + totalShares;
     const avgEngagement = totalEngagement / limitedPosts.length;
 
-    // Unified Formula: ((Total Engagement / Post Count) / Total Followers) * 100
-    // which is (avgEngagement / followers) * 100
-    const engagementRate = followers > 0
-      ? ((avgEngagement / followers) * 100).toFixed(2)
-      : '0.00';
-
-    // Use real followers instead of estimated
-    const estimatedFollowers = followers;
-    const estimatedReach = followers * limitedPosts.length;
+    // Engagement rate - we don't have followers from this API
+    // So we'll estimate based on engagement (or set to 0)
+    const estimatedFollowers = 0; // Not available from post scraper
+    const engagementRate = 0; // Can't calculate without followers
 
     // Calculate reputation score (0-100)
     const reputationScore = Math.min(100, Math.round(
-      (parseFloat(engagementRate) * 10) +
       (limitedPosts.length * 2) +
       (avgEngagement / 10) +
       20 // Base score
@@ -165,89 +163,42 @@ class LinkedInRapidApiService {
     console.log(`📊 Processed ${limitedPosts.length} posts for ${companyName}`);
     console.log(`   Total Engagement: ${totalEngagement}`);
     console.log(`   Avg Engagement/Post: ${avgEngagement.toFixed(1)}`);
-    console.log(`   Engagement Rate: ${engagementRate}%`);
     console.log(`   Reputation Score: ${reputationScore}/100`);
 
     return {
       dataAvailable: true,
       companyName: companyName,
       companyUrl: companyUrl,
-      companyUrn: companyUrn,
+      companyUrn: null,
       companyFollowers: estimatedFollowers,
       username: username,
-      source: 'linkedin-rapidapi',
+      source: 'apify-linkedin',
       scrapedPostsCount: limitedPosts.length,
       metrics: {
-        avgInteractions: avgEngagement
+        avgInteractions: avgEngagement,
+        avgLikes: parseFloat(avgLikes.toFixed(2)),
+        avgComments: parseFloat(avgComments.toFixed(2)),
+        avgShares: parseFloat(avgShares.toFixed(2))
       },
       engagementScore: {
         likes: totalLikes,
         comments: totalComments,
-        shares: totalReposts,
-        totalReactions: totalReactions,
-        engagementRate: parseFloat(engagementRate),
-        reach: estimatedReach
+        shares: totalShares,
+        totalReactions: totalLikes,
+        engagementRate: parseFloat(engagementRate.toFixed(2)),
+        reach: 0
       },
       topPosts: processedPosts.slice(0, 5),
       allPosts: processedPosts,
       reputationBenchmark: {
         score: reputationScore,
         followers: estimatedFollowers,
-        avgEngagementRate: parseFloat(engagementRate),
+        avgEngagementRate: parseFloat(engagementRate.toFixed(2)),
         sentiment: reputationScore > 75 ? 'Excellent' : reputationScore > 50 ? 'Good' : 'Fair',
         avgEngagementPerPost: avgEngagement
       },
       lastUpdated: new Date().toISOString()
     };
-  }
-
-  /**
-   * Get company info (basic profile)
-   * @param {string} username - LinkedIn company username
-   * @returns {Object} Company profile info
-   */
-  async getCompanyProfile(username) {
-    try {
-      console.log(`📋 Fetching LinkedIn profile for: ${username}`);
-
-      const options = {
-        method: 'GET',
-        url: `${this.baseUrl}/get-company-details`,
-        params: {
-          username: username
-        },
-        headers: {
-          'x-rapidapi-key': this.rapidApiKey,
-          'x-rapidapi-host': 'linkedin-data-api.p.rapidapi.com'
-        },
-        timeout: 10000
-      };
-
-      const response = await axios.request(options);
-      const data = response.data;
-
-      if (data.success && data.data) {
-        console.log(`✅ Profile fetched for ${data.data.name}`);
-        return {
-          success: true,
-          name: data.data.name,
-          description: data.data.description,
-          website: data.data.website,
-          industry: data.data.industry,
-          companySize: data.data.companySize,
-          headquarters: data.data.headquarters,
-          founded: data.data.founded,
-          specialties: data.data.specialties,
-          followers: data.data.followersCount
-        };
-      }
-
-      return { success: false, error: 'Profile not found' };
-
-    } catch (error) {
-      console.error(`❌ Error fetching profile for ${username}:`, error.message);
-      return { success: false, error: error.message };
-    }
   }
 
   /**
@@ -292,4 +243,4 @@ class LinkedInRapidApiService {
   }
 }
 
-export default new LinkedInRapidApiService();
+export default new LinkedInApifyService();

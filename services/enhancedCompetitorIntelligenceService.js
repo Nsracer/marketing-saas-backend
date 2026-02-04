@@ -90,11 +90,68 @@ class EnhancedCompetitorIntelligenceService {
 
           if (cachedData && cachedData.yourSite && cachedData.competitorSite) {
             console.log(`✅ Using cached competitor analysis (${cachedData.cacheAge}h old)\n`);
+
+            // Supplement cached yourSite with fresh social media data if missing
+            // This ensures social media metrics are always up-to-date even in cached results
+            const supplementedYourSite = { ...cachedData.yourSite };
+
+            if (!supplementedYourSite.facebook && userSocialHandles.facebook) {
+              try {
+                const fbData = await socialMediaCacheService.getCachedMetrics(userEmail, 'facebook', 'month', true);
+                if (fbData) {
+                  supplementedYourSite.facebook = {
+                    ...fbData,
+                    connectionSource: userSocialHandles.facebook.source,
+                    isOAuthConnected: userSocialHandles.facebook.connected,
+                    connectedUsername: userSocialHandles.facebook.username
+                  };
+                  console.log(`   📱 Supplemented Facebook data from cache`);
+                }
+              } catch (e) {
+                console.warn(`   ⚠️ Could not supplement Facebook data: ${e.message}`);
+              }
+            }
+
+            if (!supplementedYourSite.instagram && userSocialHandles.instagram) {
+              try {
+                const igData = await socialMediaCacheService.getCachedMetrics(userEmail, 'instagram', 'month', true);
+                if (igData) {
+                  supplementedYourSite.instagram = {
+                    ...igData,
+                    connectionSource: userSocialHandles.instagram.source,
+                    isOAuthConnected: userSocialHandles.instagram.connected,
+                    connectedUsername: userSocialHandles.instagram.username
+                  };
+                  console.log(`   📱 Supplemented Instagram data from cache`);
+                }
+              } catch (e) {
+                console.warn(`   ⚠️ Could not supplement Instagram data: ${e.message}`);
+              }
+            }
+
+            if (!supplementedYourSite.linkedin && userSocialHandles.linkedin) {
+              try {
+                const liData = await socialMediaCacheService.getCachedMetrics(userEmail, 'linkedin', 'month', true);
+                if (liData) {
+                  supplementedYourSite.linkedin = {
+                    ...liData,
+                    connectionSource: userSocialHandles.linkedin.source,
+                    isOAuthConnected: userSocialHandles.linkedin.connected,
+                    connectedUsername: userSocialHandles.linkedin.username
+                  };
+                  console.log(`   📱 Supplemented LinkedIn data from cache`);
+                }
+              } catch (e) {
+                console.warn(`   ⚠️ Could not supplement LinkedIn data: ${e.message}`);
+              }
+            }
+
             return {
               success: true,
               cached: true,
               cacheAge: cachedData.cacheAge,
-              ...cachedData
+              ...cachedData,
+              yourSite: supplementedYourSite
             };
           }
         } catch (err) {
@@ -303,7 +360,7 @@ class EnhancedCompetitorIntelligenceService {
 
       // Facebook (OAuth priority)
       if (socialHandles.facebook) {
-        const fbData = await socialMediaCacheService.getCachedMetrics(userEmail, 'facebook');
+        const fbData = await socialMediaCacheService.getCachedMetrics(userEmail, 'facebook', 'month', true);
         if (fbData) {
           userData.facebook = {
             ...fbData,
@@ -317,7 +374,7 @@ class EnhancedCompetitorIntelligenceService {
 
       // Instagram (OAuth priority)
       if (socialHandles.instagram) {
-        const igData = await socialMediaCacheService.getCachedMetrics(userEmail, 'instagram');
+        const igData = await socialMediaCacheService.getCachedMetrics(userEmail, 'instagram', 'month', true);
         if (igData) {
           userData.instagram = {
             ...igData,
@@ -331,7 +388,7 @@ class EnhancedCompetitorIntelligenceService {
 
       // LinkedIn (OAuth priority)
       if (socialHandles.linkedin) {
-        const liData = await socialMediaCacheService.getCachedMetrics(userEmail, 'linkedin');
+        const liData = await socialMediaCacheService.getCachedMetrics(userEmail, 'linkedin', 'month', true);
         if (liData) {
           userData.linkedin = {
             ...liData,

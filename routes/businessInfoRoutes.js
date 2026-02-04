@@ -33,10 +33,16 @@ router.get('/', async (req, res) => {
       console.log('⚠️ Could not check GA/GSC connection status');
     }
 
+    // Check Instagram with Facebook fallback (Instagram uses Facebook OAuth)
+    let instagramConnected = await oauthTokenService.isConnected(email, 'instagram');
+    if (!instagramConnected) {
+      instagramConnected = await oauthTokenService.isConnected(email, 'facebook');
+    }
+
     // Check social media connections and fetch actual profile info
     const socialConnections = {
       facebook: await oauthTokenService.isConnected(email, 'facebook'),
-      instagram: await oauthTokenService.isConnected(email, 'instagram'),
+      instagram: instagramConnected,
       linkedin: await oauthTokenService.isConnected(email, 'linkedin')
     };
 

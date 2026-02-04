@@ -46,8 +46,15 @@ const socialMediaCacheService = {
         .eq('platform', platform);
 
       // Filter by specific ID if provided (for LinkedIn organizations)
-      if (platform === 'linkedin' && filterId) {
-        query = query.eq('linkedin_company_id', filterId);
+      if (platform === 'linkedin') {
+        if (filterId) {
+          // Specific organization requested
+          query = query.eq('linkedin_company_id', filterId);
+        } else {
+          // No specific org ID - exclude personal profile data to only get organization data
+          // Personal profile data is marked with linkedin_company_id = 'personal'
+          query = query.neq('linkedin_company_id', 'personal');
+        }
       }
 
       if (!ignoreExpiration) {
@@ -339,23 +346,54 @@ const socialMediaCacheService = {
         }
       }
 
-      // Use upsert to handle insert/update in one operation
-      // The unique constraint is on (user_email, platform, period), so we use that for conflict resolution
-      const { error } = await supabase
-        .from('social_media_cache')
-        .upsert(cacheEntry, {
-          onConflict: 'user_email,platform,period',
-          ignoreDuplicates: false
-        });
+      // LinkedIn uses upsert with its constraint (includes company_id for multiple orgs)
+      // Facebook/Instagram use delete + insert pattern since partial index doesn't work with Supabase upsert
+      let error = null;
+
+      if (platform === 'linkedin' && cacheEntry.linkedin_company_id) {
+        // LinkedIn: Use upsert with the existing constraint
+        const conflictColumns = 'user_email,platform,period,linkedin_company_id';
+        console.log(`🔑 LinkedIn: Using upsert with conflict columns: ${conflictColumns}`);
+
+        const result = await supabase
+          .from('social_media_cache')
+          .upsert(cacheEntry, {
+            onConflict: conflictColumns,
+            ignoreDuplicates: false
+          });
+        error = result.error;
+      } else {
+        // Facebook/Instagram: Delete existing entry first, then insert
+        // This is needed because partial unique indexes don't work with Supabase JS client's upsert
+        console.log(`🔑 ${platform}: Using delete + insert pattern`);
+
+        // Delete existing entry for this user/platform/period
+        const { error: deleteError } = await supabase
+          .from('social_media_cache')
+          .delete()
+          .eq('user_email', userEmail)
+          .eq('platform', platform)
+          .eq('period', cacheEntry.period);
+
+        if (deleteError) {
+          console.log(`⚠️ Delete error (non-fatal): ${deleteError.message}`);
+        }
+
+        // Insert new entry
+        const result = await supabase
+          .from('social_media_cache')
+          .insert(cacheEntry);
+        error = result.error;
+      }
 
       if (error) {
-        console.error(`❌ Error upserting ${platform} cache:`, error);
+        console.error(`❌ Error saving ${platform} cache:`, error);
         if (platform === 'instagram' || platform === 'linkedin') {
           console.error(`   Full cache entry:`, JSON.stringify(cacheEntry, null, 2));
         }
         throw error;
       }
-      console.log(`✅ Cache upserted for ${platform}`);
+      console.log(`✅ Cache saved for ${platform}`);
 
       // Auto-sync account name to business info
       if (cacheEntry.account_name) {
@@ -633,6 +671,197 @@ const socialMediaCacheService = {
     } catch (error) {
       console.error('❌ Error getting connection statuses:', error);
       return [];
+    }
+  },
+
+  /**
+   * Get cached LinkedIn organizations for a user
+   * Returns all unique organizations stored in cache for this user
+   * @param {string} userEmail - User's email
+   * @returns {Promise<Array>} Array of organization objects {id, name, urn, picture}
+   */
+  async getCachedOrganizations(userEmail) {
+    try {
+      console.log(`📦 Fetching cached LinkedIn organizations for ${userEmail}`);
+
+      const { data, error } = await supabase
+        .from('social_media_cache')
+        .select('linkedin_company_id, linkedin_company_urn, account_name, updated_at')
+        .eq('user_email', userEmail)
+        .eq('platform', 'linkedin')
+        .not('linkedin_company_id', 'is', null)
+        .order('updated_at', { ascending: false });
+
+      if (error) {
+        console.error('❌ Error fetching cached organizations:', error);
+        return [];
+      }
+
+      if (!data || data.length === 0) {
+        console.log('📭 No cached LinkedIn organizations found');
+        return [];
+      }
+
+      // Deduplicate by linkedin_company_id (keep most recent)
+      const uniqueOrgs = new Map();
+      for (const row of data) {
+        if (row.linkedin_company_id && !uniqueOrgs.has(row.linkedin_company_id)) {
+          uniqueOrgs.set(row.linkedin_company_id, {
+            id: row.linkedin_company_id,
+            name: row.account_name || `Organization ${row.linkedin_company_id}`,
+            urn: row.linkedin_company_urn || `urn:li:organization:${row.linkedin_company_id}`,
+            picture: null // Logos not stored in cache
+          });
+        }
+      }
+
+      const organizations = Array.from(uniqueOrgs.values());
+      console.log(`✅ Found ${organizations.length} cached LinkedIn organization(s)`);
+
+      return organizations;
+    } catch (error) {
+      console.error('❌ Error getting cached organizations:', error);
+      return [];
+    }
+  },
+
+  /**
+   * Cache personal LinkedIn analytics (user-level, not org-level)
+   * Used for personal profile metrics like impressions, reactions, profile views
+   * @param {string} userEmail - User's email
+   * @param {object} personalData - Personal analytics data {profile, personalAnalytics}
+   * @returns {Promise<boolean>} Success status
+   */
+  async cachePersonalAnalytics(userEmail, personalData) {
+    try {
+      console.log(`💾 Caching personal LinkedIn analytics for ${userEmail}`);
+
+      const expiresAt = new Date(Date.now() + CACHE_DURATION_MINUTES * 60 * 1000).toISOString();
+
+      const cacheEntry = {
+        user_email: userEmail,
+        platform: 'linkedin', // Use 'linkedin' for constraint compatibility
+        account_id: personalData.profile?.id || null,
+        account_name: personalData.profile?.name || null,
+        username: personalData.profile?.email || null,
+        profile_url: personalData.profile?.picture || null,
+        engagement_data: {
+          impressions: personalData.personalAnalytics?.postStats?.impressions || 0,
+          reactions: personalData.personalAnalytics?.postStats?.reactions || 0,
+          comments: personalData.personalAnalytics?.postStats?.comments || 0,
+          reshares: personalData.personalAnalytics?.postStats?.reshares || 0,
+          membersReached: personalData.personalAnalytics?.postStats?.membersReached || 0,
+          profileViews: personalData.personalAnalytics?.profileStats?.profileViews || 0,
+          searchAppearances: personalData.personalAnalytics?.profileStats?.searchAppearances || 0,
+          connections: personalData.personalAnalytics?.connections || 0
+        },
+        follower_count: personalData.personalAnalytics?.connections || 0,
+        follower_growth: [],
+        top_posts: [],
+        posts_data: {},
+        reputation_data: {},
+        // Use 'personal' as a marker ID to differentiate from org data
+        linkedin_company_id: 'personal',
+        linkedin_company_urn: 'urn:li:person:personal',
+        data_available: true,
+        error_message: null,
+        period: 'month', // Use 'month' period like other LinkedIn entries
+        updated_at: new Date().toISOString(),
+        last_fetched_at: new Date().toISOString(),
+        expires_at: expiresAt
+      };
+
+      // Use the same conflict resolution as regular LinkedIn cache entries 
+      // which includes linkedin_company_id in the constraint
+      const { error } = await supabase
+        .from('social_media_cache')
+        .upsert(cacheEntry, {
+          onConflict: 'user_email,platform,period,linkedin_company_id',
+          ignoreDuplicates: false
+        });
+
+      if (error) {
+        console.error('❌ Error caching personal analytics:', error);
+        return false;
+      }
+
+      console.log('✅ Personal LinkedIn analytics cached');
+      return true;
+    } catch (error) {
+      console.error('❌ Error caching personal analytics:', error);
+      return false;
+    }
+  },
+
+  /**
+   * Get cached personal LinkedIn analytics for a user
+   * @param {string} userEmail - User's email
+   * @param {boolean} ignoreExpiration - If true, return expired data
+   * @returns {Promise<object|null>} Cached personal analytics or null
+   */
+  async getCachedPersonalAnalytics(userEmail, ignoreExpiration = false) {
+    try {
+      console.log(`📦 Fetching cached personal LinkedIn analytics for ${userEmail}`);
+
+      let query = supabase
+        .from('social_media_cache')
+        .select('*')
+        .eq('user_email', userEmail)
+        .eq('platform', 'linkedin')
+        .eq('linkedin_company_id', 'personal'); // Personal data marker
+
+      if (!ignoreExpiration) {
+        query = query.gt('expires_at', new Date().toISOString());
+      }
+
+      const { data, error } = await query
+        .order('last_fetched_at', { ascending: false })
+        .limit(1)
+        .single();
+
+      if (error) {
+        if (error.code === 'PGRST116') {
+          console.log('📭 No cached personal analytics found');
+          return null;
+        }
+        throw error;
+      }
+
+      if (!data) {
+        return null;
+      }
+
+      const ageMinutes = Math.floor((Date.now() - new Date(data.last_fetched_at).getTime()) / 60000);
+      console.log(`✅ Personal analytics cache hit (${ageMinutes} min old)`);
+
+      return {
+        profile: {
+          id: data.account_id,
+          name: data.account_name,
+          email: data.username,
+          picture: data.profile_url
+        },
+        personalAnalytics: {
+          postStats: {
+            impressions: data.engagement_data?.impressions || 0,
+            reactions: data.engagement_data?.reactions || 0,
+            comments: data.engagement_data?.comments || 0,
+            reshares: data.engagement_data?.reshares || 0,
+            membersReached: data.engagement_data?.membersReached || 0
+          },
+          profileStats: {
+            profileViews: data.engagement_data?.profileViews || 0,
+            searchAppearances: data.engagement_data?.searchAppearances || 0
+          },
+          connections: data.engagement_data?.connections || 0
+        },
+        lastUpdated: data.last_fetched_at,
+        cacheAge: ageMinutes,
+        cached: true
+      };
+    } catch (error) {
+      console.error('❌ Error getting cached personal analytics:', error);
+      return null;
     }
   }
 };

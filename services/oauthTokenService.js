@@ -107,14 +107,15 @@ const oauthTokenService = {
         .select('id')
         .eq('user_email', userEmail)
         .eq('provider', provider)
-        .single();
+        .order('updated_at', { ascending: false })
+        .limit(1);
 
-      if (existing) {
+      if (existing && existing.length > 0) {
         // Update existing tokens
         const { error } = await supabase
           .from('oauth_tokens')
           .update(tokenData)
-          .eq('id', existing.id);
+          .eq('id', existing[0].id);
 
         if (error) throw error;
       } else {
@@ -154,43 +155,43 @@ const oauthTokenService = {
         .select('*')
         .eq('user_email', userEmail)
         .eq('provider', provider)
-        .single();
+        .order('updated_at', { ascending: false })
+        .limit(1);
 
       if (error) {
-        if (error.code === 'PGRST116') {
-          return null;
-        }
         throw error;
       }
 
-      if (!data) {
+      if (!data || data.length === 0) {
         return null;
       }
 
+      const tokenRow = data[0];
+
       // Bug #5 Fix: Normalize timestamp when reading
-      const expiresAt = normalizeTimestamp(data.expires_at);
+      const expiresAt = normalizeTimestamp(tokenRow.expires_at);
 
       // Bug #9 Fix: Use consistent field names (expires_at everywhere)
       const tokens = {
-        access_token: data.access_token,
-        refresh_token: data.refresh_token,
+        access_token: tokenRow.access_token,
+        refresh_token: tokenRow.refresh_token,
         expires_at: expiresAt,
         expiry_date: expiresAt, // Keep for backward compatibility
-        scope: data.scope,
+        scope: tokenRow.scope,
         token_type: 'Bearer',
         provider: provider
       };
 
       // Add provider-specific fields
       if (provider === 'facebook') {
-        tokens.user_id = data.provider_user_id;
-        tokens.user_name = data.provider_user_name;
+        tokens.user_id = tokenRow.provider_user_id;
+        tokens.user_name = tokenRow.provider_user_name;
       }
 
       if (provider === 'linkedin') {
-        tokens.provider_user_id = data.provider_user_id;
-        tokens.provider_user_name = data.provider_user_name;
-        tokens.provider_user_email = data.provider_user_email;
+        tokens.provider_user_id = tokenRow.provider_user_id;
+        tokens.provider_user_name = tokenRow.provider_user_name;
+        tokens.provider_user_email = tokenRow.provider_user_email;
       }
 
       return tokens;
@@ -223,24 +224,30 @@ const oauthTokenService = {
    * @param {string} userEmail - User's email
    * @returns {Promise<object|null>} New tokens or null
    */
-  async refreshTokens(userEmail) {
+  async refreshTokens(userEmail, provider = 'google') {
     try {
       // Bug #1 Fix: Normalize email
       userEmail = normalizeEmail(userEmail);
+
+      // Only Google needs refresh really, but kept generic structure
+      if (provider !== 'google') {
+        // For now, only Google refresh is implemented with googleapis
+        return await this.getTokens(userEmail, provider);
+      }
 
       // Bug #6 Fix: Check if refresh is already in progress for this user
       if (refreshInProgress.get(userEmail)) {
         console.log('⏳ Token refresh already in progress for user, waiting...');
         // Wait for the existing refresh to complete
         await new Promise(resolve => setTimeout(resolve, 1000));
-        return await this.getTokens(userEmail, 'google');
+        return await this.getTokens(userEmail, provider);
       }
 
       // Mark refresh as in progress
       refreshInProgress.set(userEmail, true);
 
       try {
-        const tokens = await this.getTokens(userEmail, 'google');
+        const tokens = await this.getTokens(userEmail, provider);
         if (!tokens || !tokens.refresh_token) {
           console.log('❌ No refresh token available for user');
           return null;
@@ -261,7 +268,7 @@ const oauthTokenService = {
           expires_at: normalizeTimestamp(credentials.expiry_date || credentials.expires_at),
           scope: credentials.scope || tokens.scope
         };
-        await this.storeTokens(userEmail, newTokens);
+        await this.storeTokens(userEmail, newTokens, provider);
 
         return newTokens;
       } finally {

@@ -1,0 +1,10 @@
+APIFY_API_KEY: Set
+
+Testing Apify actor: scraper-engine/linkedin-company-scraper
+   ❌ Failed: Actor with this name was not found
+
+Testing Apify actor: scraper-engine/profile-scraper
+   ❌ Failed: Actor with this name was not found
+
+Testing Apify actor: revolist/linkedin-company-scraper
+   ❌ Failed: Actor with this name was not found
